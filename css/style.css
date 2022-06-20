@@ -31,7 +31,8 @@ nav{
 .message{
     background: red;
     width:24%;
-    padding:12px;
+    /* padding:12px; */
+    border: 2px solid red;
     color:white;
     margin:12px;
 }
@@ -84,7 +85,13 @@ nav{
 }
 
 .author{
+    width: 100%;
+    height: 100%;
     background-color: white;
     color:black;
     text-align: center;
+}
+
+.message_text{
+    font-size:20px;
 }

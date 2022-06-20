@@ -14,24 +14,24 @@ const append = (message,position)=>{
     element.innerHTML = message;
     element.classList.add("message");
     element.classList.add(position);
+    element.style.padding = "12px";
     container.append(element);
+    // container.scrollTop = height;
 }
 
-// const appendText = (name,message,position)=>{
-//     const card = `<div class="message">
-//         <div class="author">
-//             <h3>${name}</h3>
-//         </div>
-//         <div id="message">
-//             <p>${message}</p>
-//         </div>
-    
-//     </div>`;
+const appendText = (name,message,position)=>{
+    const card = `<div class="message`+` ${position}">
+    <h3 class="author">${name}:</h3>
+    <p class="message_text">
+        ${message}
+    </p>
+</div>`
 
-//     container.insertAdjacentHTML('afterend',card);
-//     const text = document.querySelector(".message");
-//     text.classList.add(position);
-// }
+    container.insertAdjacentHTML('beforeend',card);
+    let height = container.scrollHeight;
+    console.log(`${height}`);
+    container.scrollTop = height;
+}
 
 
 socket.on("user-joined",(name)=>{
@@ -41,8 +41,8 @@ socket.on("user-joined",(name)=>{
 
 
 socket.on("receive",(data)=>{
-    append(`${data.name}:${data.message}`,'right');
-    // appendText(data.name,data.message,'right');
+    // append(`${data.name}:${data.message}`,'right');
+    appendText(data.name,data.message,'right');
 })
 
 socket.on('leave',(data)=>{
@@ -53,7 +53,8 @@ form.addEventListener('submit',(e)=>{
     e.preventDefault();
     const message = messageInp.value;
     if(message != ""){
-        append(`you : ${message}`,'left');
+        // append(`you : ${message}`,'left');
+        appendText("You",message,'left');
         socket.emit('send',message);
         messageInp.value = "";
     }
