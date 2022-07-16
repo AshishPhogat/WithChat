@@ -1,14 +1,18 @@
+//connecting client with the socket.io server
 const socket = io('http://localhost:8000');
 
+
+//all the elements taking part in the application.
 const form = document.getElementById("send_container");
 const messageInp = document.getElementById("messageInp");
 const container = document.querySelector(".message_inbox");
-// console.log(container);
 
 
+//input the person name using a prompt.
 const person  = prompt('enter your name to join chat');
 socket.emit('new-user-joined',person);
 
+//using to append when a user joins or leaves the chat
 const append = (message,position)=>{
     const element = document.createElement('div');
     element.innerHTML = message;
@@ -16,7 +20,9 @@ const append = (message,position)=>{
     element.classList.add(position);
     element.style.padding = "12px";
     container.append(element);
-    // container.scrollTop = height;
+    let height = container.scrollHeight;
+    console.log(`${height}`);
+    container.scrollTop = height;
 }
 
 const appendText = (name,message,position)=>{
@@ -46,7 +52,7 @@ socket.on("receive",(data)=>{
 })
 
 socket.on('leave',(data)=>{
-    append(`${data.type} left the chat`,'left');
+    append(`${data.type} left the chat`,'right');
 })
 
 form.addEventListener('submit',(e)=>{
@@ -59,3 +65,4 @@ form.addEventListener('submit',(e)=>{
         messageInp.value = "";
     }
 });
+

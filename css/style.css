@@ -22,15 +22,15 @@ nav{
     margin:10px;
     border-radius: 5px;
     /* background-color: burlywood; */
-    width:70%;
+    width:70vw;
     margin:auto;
-    height: 65vh;
+    height: 60vh;
     overflow-y:scroll;
 }
 
 .message{
     background: red;
-    width:24%;
+    width:24vw;
     /* padding:12px; */
     border: 2px solid red;
     color:white;
